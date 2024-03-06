@@ -13,16 +13,22 @@ The morse code representation of a character is obtained by first converting the
 
 The following snippet (which does most of the heavy lifting) reads the morse code byte bit by bit, blinking a dit for a 1, and blinking a dah for a 0. Before any symbols are output, the loop must reach the first 1, allowing the length of each character to vary from 0 to 7 symbols.
 ```cpp
-bool inMorse = false;
+byte morse = unknown; // The morse representation as a byte, defaults to unknown/?
+bool inMorse = false; // Flag to keep track of when we've reached the start of the symbol sequence
+
+// Iterate through every bit in the morse byte
 for(int i = 7; i >= 0; i--){
+  // If we're in the morse symbols, call dit() for a 1 or dah() for a 0
   if(inMorse){
     if((morse >> i) & 0b1){
       dit();
     }else{
       dah();
     }
+	// Delay between each symbol
     delay(unit_time * symbol_space);
   }else{
+    // If the symbol sequence hasn't started yet, but we see a 1, set the inMorse flag
     if((morse >> i) & 0b1){
       inMorse = true;
     }
