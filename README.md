@@ -2,12 +2,10 @@
 S306 SIT210 Task 1.1P, blink a student's name in morse code whenever a button is pressed.
 
 ## Description
-The pin definitions in the main file (morseLEDv1_0.ino) are for the ESP8266 based D1 Mini board. These definitions may be removed or modified for other boards
+The pin definitions are for the ESP8266 based D1 Mini board. These definitions may be removed or modified for other boards
 The morse code timing follows <https://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.1677-1-200910-I!!PDF-E.pdf>.
 
 Connect an LED to the `morseLED`, and a button (pulled down) to `buttonPin`. Whenever the button is pressed, the sketch will translate the string to morse code, and blink the morse code using the LED.
-
-Demonstration video: <link to video> (link to be added when correct board arrives)
 
 ## How it Works
 The morse code representation of a character is obtained by first converting the character to uppercase, followed by looking up the morse byte in either the letters or numbers lookup. If a character is not in either of them or a space, the morse byte defaults to a "?", or whichever byte is defined in the definitions section.
@@ -25,9 +23,9 @@ for(int i = 7; i >= 0; i--){
   // If we're in the morse symbols, call dit() for a 1 or dah() for a 0
   if(inMorse){
     if((morse >> i) & 0b1){
-      dit();
+      blink(dit_units);
     }else{
-      dah();
+      blink(dah_units);
     }
 	// Delay between each symbol
     delay(unit_time * symbol_space);

@@ -61,17 +61,10 @@ byte lookup_morse_numbers[] = {
   0b00100001
 };
 
-// Blink a short dit (dot)
-void dit(){
+// Blink the LED for [unit_time * units]ms
+void blink(int units){
   digitalWrite(morseLED, HIGH);
-  delay(unit_time * dit_units);
-  digitalWrite(morseLED, LOW);
-}
-
-// Blink a long dah (dash)
-void dah(){
-  digitalWrite(morseLED, HIGH);
-  delay(unit_time * dah_units);
+  delay(unit_time * units);
   digitalWrite(morseLED, LOW);
 }
 
@@ -94,9 +87,9 @@ void blinkMorseChar(char c){
   for(int i = 7; i >= 0; i--){
     if(inMorse){
       if((morse >> i) & 0b1){
-        dit();
+        blink(dit_units);
       }else{
-        dah();
+        blink(dah_units);
       }
       delay(unit_time * symbol_space);
     }else{
