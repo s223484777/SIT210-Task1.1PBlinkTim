@@ -1,22 +1,6 @@
 // ESP8266 D1 Mini Pin Definitions
-#define D0   16
 #define D1    5
 #define D2    4
-#define D3    0
-#define D4    2
-#define D5   14
-#define D6   12
-#define D7   13
-#define D8   15
-#define TX    1
-#define RX    3
-#define SCL   5
-#define SDA   4
-#define WAKE 16
-#define SCLK 14
-#define MISO 12
-#define MOSI 13
-#define CS   15
 
 // Morse Definitions
 #define unit_time           125 // Unit time in ms
